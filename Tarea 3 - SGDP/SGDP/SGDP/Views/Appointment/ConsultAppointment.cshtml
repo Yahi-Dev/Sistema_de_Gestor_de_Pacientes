@@ -1,0 +1,31 @@
+﻿@using SGDP.Core.Application.ViewModels.Appointment
+@model SaveAppointmentViewModel
+@{
+    ViewData["Title"] = "ConsultAppointment";
+}
+<h1 class="text-info text-center"><font style="vertical-align: inherit; margin-top: 20px;"><font style="vertical-align: inherit;">Consulta de la cita</font></font></h1>
+
+<div class="container-fluid" style="margin-top: 20px;">
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Tipo</font></font></th>
+                <th scope="col"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Nombre</font></font></th>
+                <th scope="col"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Cedula</font></font></th>
+                <th scope="col"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Nombre de la prueba</font></font></th>
+                <th scope="col"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Estado de la prueba</font></font></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="table-active">
+                <th scope="row"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Activo</font></font></th>
+                <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@Model.PatienteName @Model.PatienteLastName</font></font></td>
+                <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@Model.CedulaPatient</font></font></td>
+                <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@Model.NameTest</font></font></td>
+                <th scope="col"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">En proceso...</font></font></th>
+            </tr>
+        </tbody>
+    </table>
+    <a asp-controller="Appointment" asp-action="Index" class="btn btn-warning">Volver atras</a>
+</div>

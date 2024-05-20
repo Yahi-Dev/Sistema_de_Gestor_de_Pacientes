@@ -1,0 +1,39 @@
+﻿@using SGDP.Core.Application.ViewModels.Appointment
+@model SaveAppointmentViewModel
+@{
+    ViewData["Title"] = "AssignAppointment";
+}
+<div class="container-fluid" style="margin-top: 20px;>
+
+    <div class="row">
+        <div class="col-6 offset-3">
+            <div class="card">
+                <div class="card-header bg-dark text-light text-center">
+                    <h4 class="text-center">Asignar una prueba</h4>
+                </div>
+                <div class="card-body">
+                    <form method="post" asp-controller="Appointment" asp-action="AssignAppointment" enctype="multipart/form-data">
+
+                        <div class="mb-3">
+                            <label asp-for="IdNameTest" class="form-label">Nombre de la prueba: </label>
+                            <select asp-for="IdNameTest" class="form-select">
+                                <option>Seleccione una prueba</option>
+                            @foreach (var p in Model.ListLabTest)
+                            {
+                               <option value="@p.IdLabTest">@Html.Raw(p.NameLabTest)</option>
+                            }
+                        </select>
+                            <span asp-validation-for="IdNameTest" class="text-danger"></span>
+                        </div>
+
+                        <input type="hidden" asp-for="Id" />
+
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                        <a asp-controller="Appointment" asp-action="Index" class="btn btn-warning">Volver atras</a>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

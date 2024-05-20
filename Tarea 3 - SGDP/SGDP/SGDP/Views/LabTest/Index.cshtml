@@ -1,0 +1,42 @@
+﻿@using SGDP.Core.Application.ViewModels.LabTest
+@model List<LabTestViewModel>
+
+@{
+    ViewData["Title"] = "Pruebas de Laboratorio";
+}
+
+<div class="container-fluid" style="margin-top: 7px;">
+    <div class="row mb-3">
+        <div class="col-3 offset-9" style="margin-top:15px;">
+            <a asp-controller="LabTest" asp-action="RegisterLabTest" class="btn btn-outline-success">
+                Crear nueva prueba de Lab
+            </a>
+        </div>
+    </div>
+    @if (Model == null || Model.Count == 0)
+    {
+        <h2>No hay pruebas en el sistema</h2>
+    }
+    else
+    {
+        <div class="card-body">
+            <div class="row">
+                @foreach (LabTestViewModel item in Model)
+                {
+                    <div class="col-sm-6" style="margin-top: 20px;">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title text-center"><strong>@item.TestName</strong></h4>
+                                <p class="card-text text-center">Hospital Nacional De Los Dominicanos.</p>
+                            </div>
+                            <div class="text-center">
+                                <a asp-controller="LabTest" asp-action="EditLabTest" asp-route-id="@item.Id" class="btn btn-outline-success mt-2">Editar</a>
+                                <a asp-controller="LabTest" asp-action="DeleteLabTest" asp-route-id="@item.Id" class="btn btn-outline-danger mt-2">Eliminar</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+</div>

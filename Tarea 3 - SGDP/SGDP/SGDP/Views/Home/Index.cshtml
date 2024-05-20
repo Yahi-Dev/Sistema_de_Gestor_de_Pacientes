@@ -1,0 +1,47 @@
+﻿<style>
+    .container {
+        display: flex;
+        justify-content: center;
+        margin-top: 50px;
+    }
+
+    .card {
+        border: 5px solid skyblue;
+        margin: 0 10px;
+        width: 300px;
+        height: 120px;
+    }
+</style>
+@model SGDP.Core.Application.ViewModels.DashBoard.DashBoardAdminViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="container">
+    <div class="card text-white bg-primary mb-3">
+        <div class="card-header text-center">
+            Usuarios
+        </div>
+        <div class="card-body">
+           <h4 class="card-title text-center">@Model.UsersCount</h4>
+        </div>
+    </div>
+
+    <div class="card text-white bg-primary mb-3">
+        <div class="card-header text-center">
+            Medicos
+        </div>
+        <div class="card-body">
+            <h4 class="card-title text-center">@Model.MedicosCount</h4>
+        </div>
+    </div>
+
+    <div class="card text-white bg-primary mb-3">
+        <div class="card-header text-center">
+            Pruebas de Lab activas
+        </div>
+        <div class="card-body">
+            <h4 class="card-title text-center">@Model.ActiveLabTestsCount</h4>
+        </div>
+    </div>
+</div>

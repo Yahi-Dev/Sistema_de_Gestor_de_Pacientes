@@ -1,0 +1,112 @@
+﻿@using Microsoft.AspNetCore.Http
+@using SGDP.Core.Application.Helpers;
+@using SGDP.Core.Application.ViewModels.User
+@inject IHttpContextAccessor httpContextAccessor
+@{
+    var User = httpContextAccessor.HttpContext.Session.Get<UserViewModel>("user");
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - SGDP</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/SGDP.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Layout.css" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Navegación de palanca">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarColor01">
+                    @if (User != null && User.TypeUser == "Administrador")
+                      { 
+                        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/Iconos/chequeo-de-salud.png" width="52px" height="52px" /></a>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                                aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                      }
+                    @if (User != null && User.TypeUser == "Asistente")
+                    {
+                        <a class="navbar-brand" asp-area="" asp-controller="Assistant" asp-action="Index"><img src="~/Iconos/chequeo-de-salud.png" width="52px" height="52px" /></a>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                                aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                    }
+                    else
+                    {
+                       
+                    } 
+                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                        <ul class="menu menu-hover-lines navbar-nav flex-grow-1">
+                            @if (User != null && User.TypeUser == "Administrador")
+                            {  
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Usuarios">Mant. de Usuarios</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Medico" asp-action="Index">Mant. de Médicos</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="LabTest" asp-action="Index">Mant. de Pruebas de Lab</a>
+                                </li>
+                            }
+                            @if (User != null && User.TypeUser == "Asistente")
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Assistant" asp-action="Index">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Appointment" asp-action="Index">Mant. de Citas</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Patient" asp-action="Index">Mant. de Pacientes</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Result" asp-action="Index">Mant. de Resultados de Lab</a>
+                                </li>
+                            }
+                            @if(User == null)
+                            {
+                                <h4 class="text-center">Tu salud es lo primero...</h4>
+                            }
+                        </ul>
+                        @if (User != null)
+                        {
+                            <form class="d-flex">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="LogOut"><img src="~/Iconos/cerrar-sesion (1).png" width="45px" height="45px" /></a>
+                            </form>
+                        }
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2024 - SGDP 
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,47 @@
+﻿@model SGDP.Core.Application.ViewModels.Medico.SaveMedicoViewModel
+@{
+    ViewData["Title"] = "InfoView";
+}
+<div class="container-fluid" style="margin-top: 20px;">
+
+    <h3><strong>Informacion del Medico</strong></h3>
+    <div class="text-center">
+        <div class="card-body p-0">
+            <img src="@Model.ImagePath" class="img-fluid rounded" style="max-width: 200px; margin: auto;" />
+        </div>
+    </div>
+    <div style="margin-top: 20px;">
+        <table class="table table-bordered border-primary">
+            <thead>
+                <tr>
+                    <th scope="col">Nombre y apellido</th>
+                    <th scope="col" class="table-info">@Model.Name @Model.LastName</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row" class="table-info">Email</th>
+                    <td>@Model.Email</td>
+                </tr>
+                <tr>
+                    <th scope="row">Numero Telefonico</th>
+                    <td class="table-info">@Model.Phone</td>
+                </tr>
+                <tr>
+                    <th scope="row" class="table-info">Cedula</th>
+                    <td>@Model.IdCedula</td>
+                </tr>
+                <tr>
+                    <th scope="row">Especializacion: </th>
+                    <td class="table-info">@Model.Specialization</td>
+                </tr>
+                <tr>
+                    <th scope="row" class="table-info">Estado: </th>
+                    <td><span class="badge rounded-pill bg-success"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Activo</font></font></span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <a asp-controller="Medico" asp-action="Index" class="btn btn-warning">Volver atras</a>
+</div>
+

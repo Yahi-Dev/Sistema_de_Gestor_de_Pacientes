@@ -1,0 +1,71 @@
+﻿@using SGDP.Core.Application.ViewModels.Appointment
+@model List<AppointmentViewModel>
+@{
+    ViewData["Title"] = "Appointment";
+}
+<div class="container-fluid" style="margin-top: 7px;">
+    <div class="row mb-3">
+        <div class="col-3 offset-9" style="margin-top:15px;">
+            <a asp-controller="Appointment" asp-action="RegisterAppointment" class="btn btn-outline-success">
+                Crear nueva cita
+            </a>
+        </div>
+    </div>
+    @if (Model == null || Model.Count == 0)
+    {
+        <h2>No hay citas en el sistema</h2>
+    }
+    else
+    {
+        <div class="card-body">
+            <div class="row">
+                @foreach (AppointmentViewModel item in Model)
+                {
+                    <div class="card mb-4 mr-4" style="max-width: 500px; margin-right: 20px;">
+                        <div class="row no-gutters">
+                            <div class="col-md-8">
+                                @if(item.clave == 1)
+                                {
+                                    <span class="badge rounded-pill bg-danger"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Pendiente de cita</font></font></span>
+                                }
+                                @if (item.clave == 2)
+                                {
+                                    <span class="badge rounded-pill bg-warning"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Pendiente de resultados</font></font></span>
+                                }
+                                @if (item.clave == 3)
+                                {
+                                    <span class="badge rounded-pill bg-info"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Completado</font></font></span>
+                                }
+                                <div class="card-body">
+                                    <h5 class="card-title"><strong>Paciente: </strong>@item.Patiente</h5>
+                                    <p class="card-text"><strong>Medico: </strong>@item.Medico</p>
+                                    <p class="card-text"><strong>Fecha: </strong>@item.Date</p>
+                                    <p class="card-text"><strong>Hora: </strong>@item.Time</p>
+                                    <p class="card-text"><small class="text-muted"><strong>Asunto: @item.why</strong></small></p>
+                                </div>
+                                @if (item.clave == 1)
+                                {
+                                    <a asp-controller="Appointment" asp-action="EditAppointment" asp-route-id="@item.Id" class="btn btn-outline-success mt-2">Editar</a>
+                                }
+                                    <a asp-controller="Appointment" asp-action="DeleteAppointment" asp-route-id="@item.Id" class="btn btn-outline-danger mt-2">Eliminar</a>
+                                    @if (item.clave == 1)
+                                    {
+                                        <a asp-controller="Appointment" asp-action="AssignAppointment" asp-route-id="@item.Id" class="btn btn-outline-info mt-2">Consultar</a>
+                                    }
+                                    @if (item.clave == 2)
+                                    {
+                                        <a asp-controller="Appointment" asp-action="ConsultAppointment" asp-route-id="@item.Id" class="btn btn-outline-warning mt-2">Consultar resultados</a>
+                                    }
+                                    @if (item.clave == 3)
+                                    {
+                                        <a asp-controller="Result" asp-action="ViewInfoResult" asp-route-id="@item.Id" class="btn btn-outline-success mt-2">Ver resultados</a>
+                                    }
+                            </div>
+                        </div>
+                    </div>
+
+                }
+            </div>
+        </div>
+    }
+</div>

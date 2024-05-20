@@ -1,0 +1,55 @@
+﻿@model SGDP.Core.Application.ViewModels.Pacientes.SavePatientViewModel
+@{
+    ViewData["Title"] = "InfoView";
+}
+<div class="container-fluid" style="margin-top: 20px;">
+
+    <h3><strong>Informacion del Paciente</strong></h3>
+    <div class="text-center">
+        <div class="card-body p-0">
+            <img src="@Model.ImagePathMedico" class="img-fluid rounded" style="max-width: 200px; margin: auto;" />
+        </div>
+    </div>
+    <div style="margin-top: 20px;">
+        <table class="table table-bordered border-primary">
+            <thead>
+                <tr>
+                    <th scope="col">Nombre y apellido</th>
+                    <th scope="col" class="table-success">@Model.Name @Model.LastName</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row" class="table-success">Cedula</th>
+                    <td>@Model.Cedula</td>
+                </tr>
+                <tr>
+                    <th scope="row">Numero Telefonico</th>
+                    <td class="table-success">@Model.Phone</td>
+                </tr>
+                <tr>
+                    <th scope="row" class="table-success">Direccion</th>
+                    <td>@Model.Direccion</td>
+                </tr>
+                <tr>
+                    <th scope="row">Sexo </th>
+                    <td class="table-success">@Model.Sex</td>
+                </tr>
+                <tr>
+                    <th scope="row" class="table-success">Fecha de Nacimiento: </th>
+                    <td>@Model.FechaDeNacimiento</td>
+                </tr>
+                <tr>
+                    <th scope="row">¿Es Fumador? </th>
+                    <td class="table-success">@Model.Question1</td>
+                </tr>
+                <tr>
+                    <th scope="row" class="table-success">¿Es Alergico? </th>
+                    <td>@Model.Question2</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <a asp-controller="Patient" asp-action="Index" class="btn btn-warning">Volver atras</a>
+</div>
+

@@ -1,0 +1,43 @@
+﻿@model SGDP.Core.Application.ViewModels.User.SaveUserViewModel
+@{
+    ViewData["Title"] = "InfoView";
+}
+<div class="container-fluid" style="margin-top: 20px;">
+
+    <h3><strong>Informacion del usuario</strong></h3>
+    <div class="text-center">
+        <div class="card-body p-0">
+            <img src="@Model.ImagePath" class="img-fluid rounded" style="max-width: 200px; margin: auto;" />
+        </div>
+    </div>
+    <div style="margin-top: 20px;">
+        <table class="table table-bordered border-primary">
+            <thead>
+                <tr>
+                    <th scope="col">Nombre y apellido</th>
+                    <th scope="col" class="table-info">@Model.Name @Model.LastName</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row" class="table-info">Email</th>
+                    <td>@Model.Email</td>
+                </tr>
+                <tr>
+                    <th scope="row">Nombre de usuario</th>
+                    <td class="table-info">@Model.UserName</td>
+                </tr>
+                <tr>
+                    <th scope="row" class="table-info">Encargo</th>
+                    <td>@Model.TypeUser</td>
+                </tr>
+                <tr>
+                    <th scope="row">Pais</th>
+                    <td class="table-info">Republica Dominicana</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <a asp-controller="User" asp-action="Usuarios" class="btn btn-warning">Volver atras</a>
+</div>
+

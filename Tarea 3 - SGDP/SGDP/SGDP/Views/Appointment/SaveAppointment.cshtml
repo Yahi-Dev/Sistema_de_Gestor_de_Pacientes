@@ -1,0 +1,70 @@
+﻿@using SGDP.Core.Application.ViewModels.Appointment
+@model SaveAppointmentViewModel
+@{
+    bool editMode = Model.Id == 0 ? false : true;
+    ViewData["Title"] = "SaveAppointment";
+}
+<div class="container-fluid" style="margin-top: 20px;>
+
+    <div class="row">
+        <div class="col-6 offset-3">
+            <div class="card">
+                <div class="card-header bg-dark text-light text-center">
+                    <h4 class="text-center">@(editMode ? $"Editando la cita" : "Creando una nueva cita")</h4>
+                </div>
+                <div class="card-body">
+                    <form method="post" asp-controller="Appointment" asp-action="@(editMode ? "EditAppointment":"RegisterAppointment")" enctype="multipart/form-data">
+
+                        <div class="mb-3">
+                            <label asp-for="patientId" class="form-label">Nombre del paciente: </label>
+                            <select asp-for="patientId" class="form-select">
+                                <option>Seleccione una opcion</option>
+                            @foreach (var p in Model.ListPatient)
+                            {
+                                <option value="@p.IdPatient">@Html.Raw(p.PatientName) @Html.Raw(p.PatientLastName)</option>
+                            }
+                            </select>
+                            <span asp-validation-for="patientId" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Doctor" class="form-label">Nombre del Drt o Medico: </label>
+                            <select asp-for="Doctor" class="form-select">
+                                <option>Seleccione una opcion</option>
+                            @foreach (var p in Model.ListMedico)
+                            {
+                                <option value="@p.MedicoName">@Html.Raw(p.MedicoName) @Html.Raw(p.MedicoLastName)</option>
+                            }
+                            </select>
+                            <span asp-validation-for="Doctor" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Date" class="form-label">Fecha: </label>
+                            <input type="date" asp-for="Date" class="form-control" />
+                            <span asp-validation-for="Date" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Time" class="form-label">Hora: </label>
+                            <input type="time" asp-for="Time" class="form-control" />
+                            <span asp-validation-for="Time" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="why" class="form-label">Causa de la cita: </label>
+                            <textarea asp-for="why" class="form-control" placeholder="Introduce una informacion detallada..."></textarea>
+                            <span asp-validation-for="why" class="text-danger"></span>
+                        </div>
+
+                        <input type="hidden" asp-for="Id" />
+
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                           <a asp-controller="Appointment" asp-action="Index" class="btn btn-warning">Volver atras</a>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,48 @@
+﻿@using SGDP.Core.Application.ViewModels.User
+@model List<UserViewModel>
+@{
+    ViewData["Title"] = "Mantenimiento de usuarios";
+}
+<div class="container-fluid" style="margin-top: 7px;">
+    <div class="row mb-3">
+        <div class="col-3 offset-9" style="margin-top:15px;">
+            <a asp-controller="User" asp-action="RegisterUser" class="btn btn-outline-success">
+                Crear nuevo usuario
+            </a>
+        </div>
+    </div>
+    @if (Model == null || Model.Count == 0)
+    {
+        <h2>No hay usuarios en el sistema</h2>
+    }
+    else
+    {
+        <div class="card-body">
+            <div class="row">
+                @foreach (UserViewModel item in Model)
+                {
+                    <div class="card mb-3 mr-3" style="max-width: 500px; margin-right: 20px;">
+                        <div class="row no-gutters">
+                            <div class="col-md-4">
+                                <br />
+                                <img src="@item.Image" class="card-img">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title"><strong>@item.Name @item.LastName</strong></h5>
+                                    <p class="card-text">@item.Email</p>
+                                    <p class="card-text">@item.UserName</p>
+                                    <p class="card-text">@item.TypeUser</p>
+                                    <p class="card-text"><small class="text-muted"><strong>Republica Dominicana</strong></small></p>
+                                </div>
+                                <a asp-controller="User" asp-action="EditUser" asp-route-id="@item.Id" class="btn btn-outline-success">Editar</a>
+                                <a asp-controller="User" asp-action="DeleteUser" asp-route-id="@item.Id" class="btn btn-outline-danger">Eliminar</a>
+                                <a asp-controller="User" asp-action="InfoUser" asp-route-id="@item.Id" class="btn btn-outline-info">Informacion</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+</div>

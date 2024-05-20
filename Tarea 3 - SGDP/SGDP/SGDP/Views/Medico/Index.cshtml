@@ -1,0 +1,49 @@
+﻿@using SGDP.Core.Application.ViewModels.Medico
+@model List<MedicoViewModel>
+@{
+    ViewData["Title"] = "Medico";
+}
+<div class="container-fluid" style="margin-top: 7px;">
+    <div class="row mb-3">
+        <div class="col-3 offset-9" style="margin-top:15px;">
+            <a asp-controller="Medico" asp-action="RegisterMedico" class="btn btn-outline-success">
+                Crear nuevo medico
+            </a>
+        </div>
+    </div>
+    @if (Model == null || Model.Count == 0)
+    {
+        <h2>No hay medicos en el sistema</h2>
+    }
+    else
+    {
+        <div class="card-body">
+            <div class="row">
+                @foreach (MedicoViewModel item in Model)
+                {
+                    <div class="card mb-3 mr-3" style="max-width: 500px; margin-right: 20px;">
+                        <div class="row no-gutters">
+                            <div class="col-md-4">
+                                <br />
+                                <img src="@item.ImagePath" class="card-img">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title"><strong>@item.Name @item.LastName</strong></h5>
+                                    <p class="card-text"><strong>Correo: </strong>@item.Email</p>
+                                    <p class="card-text"><strong>Telefono: </strong>@item.Phone</p>
+                                    <p class="card-text"><strong>Cedula: </strong>@item.IdCedula</p>
+                                    <p class="card-text"><small class="text-muted"><strong>Dept. de @item.Specialization</strong></small></p>
+                                </div>
+                                <a asp-controller="Medico" asp-action="EditMedico" asp-route-id="@item.Id" class="btn btn-outline-success mt-2">Editar</a>
+                                <a asp-controller="Medico" asp-action="DeleteMedico" asp-route-id="@item.Id" class="btn btn-outline-danger mt-2">Eliminar</a>
+                                <a asp-controller="Medico" asp-action="InfoMedico" asp-route-id="@item.Id" class="btn btn-outline-info mt-2">Informacion</a>
+                            </div>
+                        </div>
+                    </div>
+
+                }
+            </div>
+        </div>
+    }
+</div>

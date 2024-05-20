@@ -1,0 +1,48 @@
+﻿@using SGDP.Core.Application.ViewModels.Result
+@model List<LabTestResultViewModel>
+@{
+    ViewData["Title"] = "Medico";
+}
+<div class="container-fluid" style="margin-top: 7px;">
+    @if (Model == null || Model.Count == 0)
+    {
+        <h2>No hay medicos en el pruebas por realizar</h2>
+    }
+    else
+    {
+        <div class="row" style="margin-top: 50px;">
+            @foreach (LabTestResultViewModel item in Model)
+            {
+                <div class="col-md-6 mb-4">
+                    <div class="card mr-3" style="max-width: 500px;">
+                        <div class="card-body">
+                            <div class="row">
+                                @if (item.Clave == 2)
+                                {
+                                    <span class="badge rounded-pill bg-danger">Pendiente</span>
+                                }
+                                @if (item.Clave == 3)
+                                {
+                                    <span class="badge rounded-pill bg-success">Completado</span>
+                                }
+                                <div class="col-md-8" style="margin-top: 20px;">
+                                    <h5 class="card-title"><strong>@item.NamePatient @item.LastNamePatient</strong></h5>
+                                    <p class="card-text"><strong>Cedula: </strong>@item.CedulaPatient</p>
+                                    <p class="card-text"><strong>Prueba: </strong>@item.LabTestName</p>
+                                    @if (item.Clave == 2)
+                                    {
+                                        <a asp-controller="Result" asp-action="SendResult" asp-route-id="@item.Id" class="btn btn-outline-info mt-2">Enviar resultado</a>
+                                    }
+                                    @if (item.Clave == 3)
+                                    {
+                                        <a asp-controller="Result" asp-action="DeleteResult" asp-route-id="@item.Id" class="btn btn-outline-danger mt-2">Eliminar</a>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>

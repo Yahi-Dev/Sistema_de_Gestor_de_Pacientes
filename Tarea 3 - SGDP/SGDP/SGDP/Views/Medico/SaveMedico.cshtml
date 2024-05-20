@@ -1,0 +1,116 @@
+﻿@using SGDP.Core.Application.ViewModels.Medico
+@model SaveMedicoViewModel
+@{
+    bool editMode = Model.Id == 0 ? false : true;
+    ViewData["Title"] = "SaveUsuario";
+}
+<div class="container-fluid" style="margin-top: 20px;>
+
+    <div class="row">
+        <div class="col-6 offset-3">
+            <div class="card">
+                <div class="card-header bg-dark text-light text-center">
+                    <h4 class="text-center">@(editMode ? $"Editando al Lic: {Model.Name} {Model.LastName}" : "Creando un nuevo Medico")</h4>
+                </div>
+                <div class="card-body">
+                    <form method="post" asp-controller="Medico" asp-action="@(editMode ? "EditMedico":"RegisterMedico")" enctype="multipart/form-data">
+
+                        <div class="mb-3">
+                            <label asp-for="Name" class="form-label">Nombre: </label>
+                            <input type="text" asp-for="Name" class="form-control" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="LastName" class="form-label">Apellido: </label>
+                            <input type="text" asp-for="LastName" class="form-control" />
+                            <span asp-validation-for="LastName" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Email" class="form-label">Email: </label>
+                            <input type="text" asp-for="Email" class="form-control" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Phone" class="form-label">Telefono: </label>
+                            <input type="text" asp-for="Phone" class="form-control" />
+                            <span asp-validation-for="Phone" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="IdCedula" class="form-label">Cedula: </label>
+                            <input type="text" asp-for="IdCedula" class="form-control" />
+                            <span asp-validation-for="IdCedula" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="FileImg" class="form-label">Seleccione un archivo:</label>
+                            @if (editMode)
+                            {
+                                <input asp-for="FileImg" class="form-control" />
+                            }
+                            else
+                            {
+                                <input required asp-for="FileImg" class="form-control" />
+                            }
+
+                            <span asp-validation-for="FileImg" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            @if (editMode)
+                            {
+                                <div class="mb-3">
+                                    <label asp-for="Specialization" class="form-label">Especializacion: </label>
+                                    <select asp-for="Specialization" class="form-select">
+                                        <option>Seleccione una opcion</option>
+                                        <option value="medicina-general">Medicina General</option>
+                                        <option value="pediatria">Pediatría</option>
+                                        <option value="ginecologia-obstetricia">Ginecología y Obstetricia</option>
+                                        <option value="cardiologia">Cardiología</option>
+                                        <option value="dermatologia">Dermatología</option>
+                                        <option value="cirugia-general">Cirugía General</option>
+                                        <option value="neurologia">Neurología</option>
+                                        <option value="oncologia">Oncología</option>
+                                        <option value="psiquiatria">Psiquiatría</option>
+                                        <option value="ortopedia-traumatologia">Ortopedia y Traumatología</option>
+                                    </select>
+                                    <span asp-validation-for="Specialization" class="text-danger"></span>
+                                    <input type="hidden" name="TypeUser" value="@Model.Specialization" />
+                                </div>
+                            }
+                           else
+                           {
+                                <div class="mb-3">
+                                    <label asp-for="Specialization" class="form-label">Especializacion: </label>
+                                    <select asp-for="Specialization" class="form-select">
+                                        <option value="0">Seleccione una opcion</option>
+                                        <option value="medicina-general">Medicina General</option>
+                                        <option value="pediatria">Pediatría</option>
+                                        <option value="ginecologia-obstetricia">Ginecología y Obstetricia</option>
+                                        <option value="cardiologia">Cardiología</option>
+                                        <option value="dermatologia">Dermatología</option>
+                                        <option value="cirugia-general">Cirugía General</option>
+                                        <option value="neurologia">Neurología</option>
+                                        <option value="oncologia">Oncología</option>
+                                        <option value="psiquiatria">Psiquiatría</option>
+                                        <option value="ortopedia-traumatologia">Ortopedia y Traumatología</option>
+                                    </select>
+                                    <span asp-validation-for="Specialization" class="text-danger"></span>
+                                </div>
+                           }
+                        </div>
+
+                        <input type="hidden" asp-for="Id" />
+
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                        <a asp-controller="Medico" asp-action="Index" class="btn btn-warning">Volver atras</a>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,116 @@
+﻿@using SGDP.Core.Application.ViewModels.Pacientes
+@model SavePatientViewModel
+@{
+    bool editMode = Model.Id == 0 ? false : true;
+    ViewData["Title"] = "SaveUsuario";
+}
+<div class="container-fluid" style="margin-top: 20px;>
+
+    <div class="row">
+        <div class="col-6 offset-3">
+            <div class="card">
+                <div class="card-header bg-dark text-light text-center">
+                    <h4 class="text-center">@(editMode ? $"Editando al paciente: {Model.Name} {Model.LastName}" : "Creando un nuevo Paciente")</h4>
+                </div>
+                <div class="card-body">
+                    <form method="post" asp-controller="Patient" asp-action="@(editMode ? "EditPatient":"RegisterPatient")" enctype="multipart/form-data">
+
+                        <div class="mb-3">
+                            <label asp-for="Name" class="form-label">Nombre: </label>
+                            <input type="text" asp-for="Name" class="form-control" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="LastName" class="form-label">Apellido: </label>
+                            <input type="text" asp-for="LastName" class="form-control" />
+                            <span asp-validation-for="LastName" class="text-danger"></span>
+                        </div>
+
+
+                        <div class="mb-3">
+                            <label asp-for="FechaDeNacimiento" class="form-label">Fecha de nacimiento: </label>
+                            <input type="text" asp-for="FechaDeNacimiento" class="form-control" />
+                            <span asp-validation-for="FechaDeNacimiento" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Phone" class="form-label">Telefono: </label>
+                            <input type="text" asp-for="Phone" class="form-control" />
+                            <span asp-validation-for="Phone" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Cedula" class="form-label">Cedula: </label>
+                            <input type="text" asp-for="Cedula" class="form-control" />
+                            <span asp-validation-for="Cedula" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Direccion" class="form-label">Direccion: </label>
+                            <textarea asp-for="Direccion" class="form-control" placeholder="Direccion local."></textarea>
+                            <span asp-validation-for="Direccion" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="FileImg" class="form-label">Seleccione un archivo:</label>
+                            @if (editMode)
+                            {
+                                <input asp-for="FileImg" class="form-control" />
+                            }
+                            else
+                            {
+                                <input required asp-for="FileImg" class="form-control" />
+                            }
+
+                            <span asp-validation-for="FileImg" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="mb-3">
+                                <label asp-for="Sex" class="form-label">Sexo: </label>
+                                <select asp-for="Sex" class="form-select">
+                                    <option>Seleccione su sexo</option>
+                                    <option value="F">Femenino</option>
+                                    <option value="M">Maculino</option>
+                                </select>
+                                <span asp-validation-for="Sex" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="mb-3">
+                                <label asp-for="Question1" class="form-label">¿Es fumador?: </label>
+                                <select asp-for="Question1" class="form-select">
+                                    <option>Seleccione una opcion</option>
+                                    <option value="Si">Si</option>
+                                    <option value="No">No</option>
+                                </select>
+                                <span asp-validation-for="Question1" class="text-danger"></span>
+                            </div>
+                        </div>
+
+
+                        <div class="mb-3">
+                            <div class="mb-3">
+                                <label asp-for="Question2" class="form-label">¿Es alergico?: </label>
+                                <select asp-for="Question2" class="form-select">
+                                    <option>Seleccione una opcion</option>
+                                    <option value="Si">Si</option>
+                                    <option value="No">No</option>
+                                </select>
+                                <span asp-validation-for="Question2" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <input type="hidden" asp-for="Id" />
+
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                        <a asp-controller="Patient" asp-action="Index" class="btn btn-warning">Volver atras</a>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

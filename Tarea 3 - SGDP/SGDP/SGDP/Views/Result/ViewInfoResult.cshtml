@@ -1,0 +1,35 @@
+﻿@model SGDP.Core.Application.ViewModels.Result.LabTestResultViewModel
+@{
+    ViewData["Title"] = "ViewInfoResult";
+}
+<div class="container-fluid" style="margin-top: 20px;">
+    <h1 class="text-success text-center"><font style="vertical-align: inherit; margin-top: 20px;"><font style="vertical-align: inherit;"><strong>Consulta de la cita</strong></font></font></h1>
+
+    <div class="container-fluid" style="margin-top: 20px;">
+
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Tipo</font></font></th>
+                    <th scope="col"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Nombre</font></font></th>
+                    <th scope="col"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Cedula</font></font></th>
+                    <th scope="col"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Nombre de la prueba</font></font></th>
+                    <th scope="col"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Resultado de la prueba</font></font></th>
+                    <th scope="col"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Estado de la prueba</font></font></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="table-active">
+                    <th scope="row"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Paciente</font></font></th>
+                    <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@Model.NamePatient @Model.LastNamePatient</font></font></td>
+                    <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@Model.CedulaPatient</font></font></td>
+                    <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@Model.LabTestName</font></font></td>
+                    <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@Model.ResultTest</font></font></td>
+                    <th scope="col"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> <span class="badge rounded-pill bg-success"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Completado</span></font></font></th>
+                </tr>
+            </tbody>
+        </table>
+        <a asp-controller="Appointment" asp-action="Index" class="btn btn-warning">Volver atras</a>
+    </div>
+</div>
+

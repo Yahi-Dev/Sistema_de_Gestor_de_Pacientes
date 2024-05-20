@@ -1,0 +1,137 @@
+﻿@using SGDP.Core.Application.ViewModels.User
+@model SaveUserViewModel
+@{
+    bool editMode = Model.Id == 0 ? false : true;
+    ViewData["Title"] = "SaveUsuario";
+}
+<div class="container-fluid" style="margin-top: 20px;>
+
+    <div class="row">
+        <div class="col-6 offset-3">
+            <div class="card">
+                <div class="card-header bg-dark text-light text-center">
+                    <h4 class="text-center">@(editMode ? $"Editando al usuario: {Model.Name} {Model.LastName}" : "Creando un nuevo Usuario")</h4>
+                </div>
+                <div class="card-body">
+                    <form method="post" asp-controller="User" asp-action="@(editMode ? "EditUser":"RegisterUser")" enctype="multipart/form-data">
+
+                        <div class="mb-3">
+                            <label asp-for="Name" class="form-label">Nombre: </label>
+                            <input type="text" asp-for="Name" class="form-control" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="LastName" class="form-label">Apellido: </label>
+                            <input type="text" asp-for="LastName" class="form-control" />
+                            <span asp-validation-for="LastName" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Email" class="form-label">Email: </label>
+                            <input type="text" asp-for="Email" class="form-control" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <p class="card-text">
+                                <small class="text-muted">
+                                    <strong class="text-danger">@ViewBag.Check</strong>
+                                </small>
+                            </p>
+                            <label asp-for="UserName" class="form-label">Nombre de usuario: </label>
+                            <input type="text" asp-for="UserName" class="form-control" />
+                            <span asp-validation-for="UserName" class="text-danger"></span>
+                        </div>
+
+                        @if (editMode)
+                        {
+                            <div class="mb-3">
+                                <label asp-for="Password" class="form-label">Contraseña: </label>
+                                <input type="text" asp-for="Password" value="" class="form-control" placeholder="No se carga la contraseña por politica de seguridad. Puede editarla si lo desea." />
+                            </div>       
+                        }
+                        else
+                        {
+                            <div class="mb-3">
+                                <label asp-for="Password" class="form-label">Contraseña: </label>
+                                <input type="text" asp-for="Password" class="form-control" />
+                                <span asp-validation-for="Password" class="text-danger"></span>
+                            </div>
+
+                            <div class="mb-3">
+                                <label asp-for="ConfirmPassword" class="form-label">Confirmar contraseña: </label>
+                                <input type="text" asp-for="ConfirmPassword" class="form-control" />
+                                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                            </div>
+                        }
+
+                        <div class="mb-3">
+                            <label asp-for="FileImg" class="form-label">Seleccione un archivo:</label>
+                            @if (editMode)
+                            {
+                                <input asp-for="FileImg" class="form-control" />
+                            }
+                            else
+                            {
+                                <input required asp-for="FileImg" class="form-control" />
+                            }
+
+                            <span asp-validation-for="FileImg" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            @if (editMode)
+                            {
+                                <div class="mb-3">
+                                    <label asp-for="TypeUser" class="form-label">Role: </label>
+                                    <select asp-for="TypeUser" class="form-select" disabled>
+                                        <option>Seleccione una opcion</option>
+                                        <option class="" value="Asistente">Asistente</option>
+                                        <option class="" value="Administrador">Administrador</option>
+                                    </select>
+                                    <input type="hidden" id="hiddenTypeUser" name="TypeUser" value="@Model.TypeUser" />
+                                </div>
+                            }
+                           else
+                           {
+                                <div class="mb-3">
+                                    <label asp-for="TypeUser" class="form-label">Role: </label>
+                                    <select asp-for="TypeUser" class="form-select">
+                                        <option value="0">Seleccione una opcion</option>
+                                        <option class="" value="Asistente">Asistente</option>
+                                        <option class="" value="Administrador">Administrador</option>
+                                    </select>
+                                    <span asp-validation-for="TypeUser" class="text-danger"></span>
+                                </div>
+                           }
+                        </div>
+
+                        <input type="hidden" asp-for="Id" />
+
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                        <a asp-controller="User" asp-action="Usuarios" class="btn btn-warning">Volver atras</a>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    // Para deshabilitar el select y establecer su valor en el campo oculto correspondiente
+    function disableSelectAndSetValue(selectElement) {
+        selectElement.disabled = true;
+        var hiddenInput = document.getElementById('hiddenTypeUser');
+        hiddenInput.value = selectElement.value;
+    }
+
+    // Si estás en modo de edición, deshabilita el select
+    window.onload = function () {
+        var editMode = @editMode;
+        if (editMode) {
+            var selectElement = document.querySelector('select');
+            selectElement.disabled = true;
+        }
+    };
+</script>

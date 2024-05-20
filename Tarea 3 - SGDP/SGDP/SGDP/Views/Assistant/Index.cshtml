@@ -1,0 +1,67 @@
+﻿<style>
+    .container {
+        display: flex;
+        justify-content: center;
+        margin-top: 50px;
+    }
+
+    .card {
+        border: 5px solid skyblue;
+        margin: 0 10px;
+        width: 300px;
+        height: 120px;
+    }
+</style>
+@* @model SGDP.Core.Application.ViewModels.DashBoard.DashBoardViewModel *@
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container">
+    <div class="card text-white bg-primary mb-3">
+        <div class="card-header text-center">
+            Pacientes
+        </div>
+        <div class="card-body">
+            <h4 class="card-title text-center">0</h4>
+        </div>
+    </div>
+
+    <div class="card text-white bg-primary mb-3">
+        <div class="card-header text-center">
+            Citas
+        </div>
+        <div class="card-body">
+            <h4 class="card-title text-center">0</h4>
+        </div>
+    </div>
+
+    <div class="card text-white bg-primary mb-3">
+        <div class="card-header text-center">
+            Resultados
+        </div>
+        <div class="card-body">
+            <h4 class="card-title text-center">0</h4>
+        </div>
+    </div>
+</div>
+
+<div class="container text-center">
+    <div class="card text-white bg-primary mb-3">
+        <div class="card-header text-center">
+            Citas pendiente de consulta
+        </div>
+        <div class="card-body">
+            <h4 class="card-title text-center">0</h4>
+        </div>
+    </div>
+
+    <div class="card text-white bg-primary mb-3">
+        <div class="card-header text-center">
+            Citas pendiente de resultados
+        </div>
+        <div class="card-body">
+            <h4 class="card-title text-center">0</h4>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,11 @@
+Inicio de Sesion en la Sistema Gestor de Pacientes
+
+------- Vista de Asistente --------
+
+classe 
+1234
+
+------- Vista de Administrador --------
+
+yahi
+1234

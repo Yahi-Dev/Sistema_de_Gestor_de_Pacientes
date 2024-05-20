@@ -1,0 +1,11 @@
+﻿body {
+    background: #000;
+    background: url("../Iconos/pexels-pixabay-268533.jpg");
+    background-size: 100% 100%;
+    background-attachment: fixed;
+    color: #fff;
+    font-family: Century Gothic,CenturyGothic,AppleGothic,sans-serif;
+    font-weight: 100;
+    -webkit-font-smoothing: antialiased;
+    margin: 0px;
+}

@@ -1,0 +1,34 @@
+﻿@using SGDP.Core.Application.ViewModels.LabTest
+@model SaveLabTestViewModel
+@{
+    bool editMode = Model.Id == 0 ? false : true;
+    ViewData["Title"] = "SaveLabTest";
+}
+<div class="container-fluid" style="margin-top: 20px;">
+
+    <div class="row">
+        <div class="col-6 offset-3">
+            <div class="card">
+                <div class="card-header bg-dark text-light text-center">
+                    <h4 class="text-center">@(editMode ? $"Editando la prueba de lab.: {Model.TestName}" : "Creando una prueba de laboratorio")</h4>
+                </div>
+                <div class="card-body">
+                    <form method="post" asp-controller="LabTest" asp-action="@(editMode ? "EditLabTest":"RegisterLabTest")" enctype="multipart/form-data">
+
+                        <div class="mb-3">
+                            <label asp-for="TestName" class="form-label">Nombre de la prueba: </label>
+                            <input type="text" asp-for="TestName" class="form-control" />
+                            <span asp-validation-for="TestName" class="text-danger"></span>
+                        </div>
+
+                        <input type="hidden" asp-for="Id" />
+
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                        <a asp-controller="LabTest" asp-action="Index" class="btn btn-warning">Volver atras</a>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
